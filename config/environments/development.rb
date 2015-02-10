@@ -34,8 +34,6 @@ Discourse::Application.configure do
   # we recommend you use mailcatcher https://github.com/sj26/mailcatcher
   config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
 
-  config.action_mailer.raise_delivery_errors = true
-
   BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 
   config.load_mini_profiler = true

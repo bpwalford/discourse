@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
   #  and then raising a CSRF exception
   def handle_unverified_request
     # NOTE: API key is secret, having it invalidates the need for a CSRF token
+    return if request.headers['origin'] == 'http://localhost:8080'
     unless is_api?
       super
       clear_current_user
@@ -353,7 +354,7 @@ class ApplicationController < ActionController::Base
 
     def check_xhr
       # bypass xhr check on PUT / POST / DELETE provided api key is there, otherwise calling api is annoying
-      return if !request.get? && api_key_valid?
+      return if (!request.get? && api_key_valid?) || request.headers['origin'] == 'http://localhost:8080'
       raise RenderEmpty.new unless ((request.format && request.format.json?) || request.xhr?)
     end
 

@@ -197,6 +197,9 @@ class UsersController < ApplicationController
     params[:for_user_id] ? User.find(params[:for_user_id]) : current_user
   end
 
+  # rewrite to uses verbalize_it auth info to create or login new user
+  # fork vs plugins
+
   def create
     params.permit(:user_fields)
 

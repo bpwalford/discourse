@@ -200,6 +200,7 @@ Discourse::Application.routes.draw do
   get "session/current" => "session#current"
   get "session/csrf" => "session#csrf"
   get "composer-messages" => "composer_messages#index"
+  post 'session/testing' => "session#create", as: :testing
 
   resources :users, except: [:show, :update, :destroy] do
     collection do
